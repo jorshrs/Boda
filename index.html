@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::after {
+            content: "";
+            background: url('ruta/a/tu/imagen.jpg');
+            background-size: cover;
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;   
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #countdown {
+            font-size: 2em;
+            color: #333;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f5f5dc; /* Color crema */
+            border: none;
+            color: #333;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .image-placeholder {
+            width: 200px;
+            height: 200px;
+            background-image: url('ruta/a/la/imagen/de/la/pareja.jpg');
+            background-size: contain; /* Ajustar la imagen al tamaño del div */
+            background-repeat: no-repeat; /* Evitar que la imagen se repita */
+            background-position: center; /* Centrar la imagen en el div */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>¡Nos casamos!</h1>
+<div class="image-placeholder"></div>
+<p id="countdown">3 días 7 horas 39 min 18 seg</p>
+<button class="button">Ver invitación</button>
+
+<script>
+    // Establecer la fecha y hora de la boda
+    var countDownDate = new Date("Jun 15, 2024 00:00:00").getTime();
+
+    // Actualizar la cuenta regresiva cada segundo
+    var countdownfunction = setInterval(function() {
+
+        // Obtener la fecha y hora actuales
+        var now = new Date().getTime();
+
+        // Encontrar la distancia entre ahora y la fecha de la boda
+        var distance = countDownDate - now;
+
+        // Cálculos de tiempo para días, horas, minutos y segundos
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Mostrar el resultado en el elemento con id="countdown"
+        document.getElementById("countdown").innerHTML = days + " días " + hours + " horas "
+        + minutes + " minutos " + seconds + " segundos ";
+
+        // Si la cuenta regresiva termina, mostrar algún texto
+        if (distance < 0) {
+            clearInterval(countdownfunction);
+            document.getElementById("countdown").innerHTML = "¡Es hora de la boda!";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
